@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuova Edile s.r.l. | Costruzioni e Ristrutturazioni</title>
+    <meta name="description" content="Nuova Edile: costruiamo il futuro su solide fondamenta. Specializzati in costruzioni civili, industriali, ristrutturazioni e restauro conservativo.">
+    <meta name="keywords" content="impresa edile, costruzioni, ristrutturazioni, restauro, edilizia, Nuova Edile">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blueprint-blue: #1A237E;
+            --terracotta: #E65100;
+            --polished-concrete: #ECEFF1;
+            --graphite: #212121;
+            --background: #0D123B;
+            --text-primary: #ECEFF1;
+            --text-secondary: #a7acc9;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+            background-image: 
+                linear-gradient(rgba(26, 35, 126, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 35, 126, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* --- CURSOR --- */
+        .cursor {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            border-radius: 50%;
+            transition: transform 0.2s, opacity 0.3s, background-color 0.3s, width 0.3s, height 0.3s;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+        .cursor.dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--terracotta);
+            transition: transform 0.1s;
+        }
+        .cursor.circle {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--terracotta);
+            transition: transform 0.25s ease-out, opacity 0.3s, background-color 0.3s, width 0.3s, height 0.3s;
+        }
+        .cursor-grow {
+            transform: scale(2.5);
+            background-color: var(--terracotta);
+            border: none;
+        }
+        .cursor-hidden {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        /* --- GENERAL STYLING --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 100px 0;
+            overflow: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--terracotta);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--terracotta);
+            color: var(--background);
+            border: 2px solid var(--terracotta);
+        }
+
+        .btn-primary:hover {
+            color: var(--polished-concrete);
+            background-color: transparent;
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--terracotta);
+            color: var(--terracotta);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--terracotta);
+            color: var(--background);
+        }
+
+        /* --- Scroll Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal.delay-1 { transition-delay: 0.1s; }
+        .reveal.delay-2 { transition-delay: 0.2s; }
+        .reveal.delay-3 { transition-delay: 0.3s; }
+        .reveal.delay-4 { transition-delay: 0.4s; }
+
+
+        /* --- HEADER --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background-color: rgba(13, 18, 59, 0.8);
+            backdrop-filter: blur(10px);
+            transition: top 0.3s ease-in-out;
+        }
+
+        .header-scrolled {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--polished-concrete);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-mark {
+            width: 12px;
+            height: 12px;
+            background-color: var(--terracotta);
+            margin-right: 10px;
+            transform: rotate(45deg);
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-left: 35px;
+        }
+
+        .main-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--terracotta);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .main-nav a:hover::after, .main-nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .hamburger { display: none; }
+        .mobile-nav-toggle { display: none; }
+
+        /* --- HERO SECTION --- */
+        #home {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background-image: linear-gradient(rgba(13, 18, 59, 0.8), rgba(13, 18, 59, 1)), url('https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero-content h1 {
+            color: var(--polished-concrete);
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- TRUST BAR --- */
+        #trust {
+            background-color: rgba(26, 35, 126, 0.3);
+            padding: 40px 0;
+        }
+        
+        .trust-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .trust-item {
+            text-align: center;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .trust-item svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 10px;
+            color: var(--terracotta);
+        }
+
+        /* --- ABOUT US --- */
+        #chi-siamo .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--terracotta);
+            border-radius: 5px;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+        }
+        
+        /* --- SERVICES --- */
+        #servizi {
+            background-color: rgba(26, 35, 126, 0.3);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background-color: var(--blueprint-blue);
+            padding: 40px 30px;
+            border-radius: 5px;
+            border: 1px solid rgba(236, 239, 241, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--terracotta);
+        }
+
+        .service-icon {
+            color: var(--terracotta);
+            margin-bottom: 20px;
+        }
+        
+        .service-icon svg {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* --- OUR PROCESS --- */
+        .process-container {
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .process-timeline {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--blueprint-blue);
+            transform: translateX(-50%);
+        }
+
+        .process-step {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 80px;
+        }
+
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-content {
+            width: 45%;
+            background: var(--blueprint-blue);
+            padding: 30px;
+            border-radius: 5px;
+            border: 1px solid rgba(236, 239, 241, 0.1);
+        }
+        
+        .process-step:nth-child(odd) .process-content {
+            margin-right: 5%;
+        }
+        
+        .process-step:nth-child(even) .process-content {
+            margin-left: 5%;
+        }
+        
+        .process-number {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: var(--terracotta);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--background);
+            border: 5px solid var(--background);
+        }
+
+        .process-step h3 {
+            color: var(--terracotta);
+            margin-bottom: 10px;
+        }
+
+        /* --- PROJECTS --- */
+        #progetti {
+            background-color: rgba(26, 35, 126, 0.3);
+        }
+        
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--text-secondary);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--terracotta);
+            border-color: var(--terracotta);
+            color: var(--background);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            aspect-ratio: 4 / 3;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        .project-item.hidden {
+            display: none;
+        }
+        
+        .project-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(13, 18, 59, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-item:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            transform: translateY(20px);
+            transition: transform 0.5s 0.2s;
+        }
+
+        .project-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transform: translateY(20px);
+            transition: transform 0.5s 0.3s;
+        }
+        
+        .project-item:hover .project-overlay h3,
+        .project-item:hover .project-overlay p {
+            transform: translateY(0);
+        }
+
+        /* --- TECHNOLOGY --- */
+        #tecnologia {
+            background-color: var(--blueprint-blue);
+        }
+        #tecnologia .container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .tech-content {
+            flex: 1;
+        }
+        .tech-image {
+            flex: 1;
+            max-width: 500px;
+        }
+        .tech-image img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .tech-content p {
+            margin: 20px 0 30px;
+        }
+
+        /* --- CONTACT --- */
+        #contatti .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        
+        .contact-info p {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details svg {
+            width: 24px;
+            height: 24px;
+            color: var(--terracotta);
+            margin-right: 15px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--blueprint-blue);
+            border: 1px solid rgba(236, 239, 241, 0.2);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--terracotta);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* --- FOOTER --- */
+        .main-footer {
+            background-color: var(--blueprint-blue);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--polished-concrete);
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-nav a:hover {
+            color: var(--terracotta);
+        }
+        
+        .social-links {
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            color: var(--text-secondary);
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: var(--terracotta);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(236, 239, 241, 0.1);
+            padding-top: 30px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--blueprint-blue);
+                flex-direction: column;
+                justify-content: center;
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+            .main-nav.active {
+                right: 0;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            .main-nav li {
+                margin: 20px 0;
+            }
+            .main-nav a {
+                font-size: 1.5rem;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+                z-index: 1001;
+            }
+            .hamburger {
+                display: block;
+                width: 30px;
+                height: 22px;
+                position: relative;
+                cursor: pointer;
+            }
+            .hamburger span {
+                display: block;
+                position: absolute;
+                height: 3px;
+                width: 100%;
+                background: var(--polished-concrete);
+                border-radius: 3px;
+                left: 0;
+                transition: all 0.3s;
+            }
+            .hamburger span:nth-child(1) { top: 0px; }
+            .hamburger span:nth-child(2) { top: 9px; }
+            .hamburger span:nth-child(3) { top: 18px; }
+
+            .mobile-nav-toggle.active .hamburger span:nth-child(1) {
+                transform: rotate(45deg);
+                top: 9px;
+            }
+            .mobile-nav-toggle.active .hamburger span:nth-child(2) {
+                opacity: 0;
+            }
+            .mobile-nav-toggle.active .hamburger span:nth-child(3) {
+                transform: rotate(-45deg);
+                top: 9px;
+            }
+
+            #chi-siamo .container, #contatti .container, #tecnologia .container {
+                grid-template-columns: 1fr;
+            }
+            
+            #tecnologia .container {
+                flex-direction: column-reverse;
+            }
+
+            .process-timeline {
+                left: 20px;
+            }
+            .process-step, .process-step:nth-child(even) {
+                flex-direction: column;
+            }
+            .process-content {
+                width: 100%;
+            }
+            .process-step:nth-child(odd) .process-content,
+            .process-step:nth-child(even) .process-content {
+                margin: 0 0 0 40px;
+            }
+            .process-number {
+                left: 20px;
+                top: 0;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .main-nav {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor dot"></div>
+    <div class="cursor circle"></div>
+
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-mark"></div>
+                NUOVA EDILE
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#chi-siamo">Chi Siamo</a></li>
+                    <li><a href="#servizi">Servizi</a></li>
+                    <li><a href="#progetti">Progetti</a></li>
+                    <li><a href="#processo">Il Nostro Processo</a></li>
+                    <li><a href="#contatti">Contatti</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-nav-toggle">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="reveal">Costruiamo il futuro su solide fondamenta.</h1>
+                    <p class="reveal delay-1">Dalla progettazione alla consegna: la vostra visione, la nostra competenza. Realizziamo progetti civili, industriali e ristrutturazioni con la massima qualità e precisione.</p>
+                    <div class="hero-buttons">
+                        <a href="#progetti" class="btn btn-primary reveal delay-2">Scopri i nostri progetti</a>
+                        <a href="#contatti" class="btn btn-secondary reveal delay-3">Richiedi una consulenza</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Bar Section -->
+        <section id="trust">
+            <div class="container trust-container">
+                <div class="trust-item reveal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M226.43,56.83,149.17,23.2a16.05,16.05,0,0,0-14.34,0L57.57,56.83A16,16,0,0,0,48,71.17V184.83a16,16,0,0,0,9.57,14.34l77.26,33.63a16.05,16.05,0,0,0,14.34,0l77.26-33.63A16,16,0,0,0,236,184.83V71.17A16,16,0,0,0,226.43,56.83ZM168,104.79l-51.56,51.57a8,8,0,0,1-11.32,0L88,139.21a8,8,0,0,1,11.32-11.32L112,140.69l45.16-45.16a8,8,0,0,1,11.31,11.31l.53-.55Z"></path></svg>
+                    Qualità Certificata
+                </div>
+                <div class="trust-item reveal delay-1">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8H88a8,8,0,0,1,0,16H48v56h48a8,8,0,0,1,5.66,2.34l48,48A8,8,0,0,1,152,176h64a8,8,0,0,0,8-8v-24a8,8,0,0,1,16,0Zm-8-24H152a8,8,0,0,1-5.66-2.34l-24-24A8,8,0,0,0,116.69,96H48V64h32a8,8,0,0,0,0-16H40a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V120a8,8,0,0,0-8-8Zm-44.48-2.61,13.6,9.88a8,8,0,0,0,9.76-11.74l-24-33.06a8,8,0,0,0-13.76,7.88L172,104l-16.12,22.18A8,8,0,0,0,163.52,139.39Z"></path></svg>
+                    Sicurezza sul Lavoro
+                </div>
+                <div class="trust-item reveal delay-2">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H208V208ZM128,88a40,40,0,1,1-40,40A40,40,0,0,1,128,88Zm0,64a24,24,0,1,0-24-24A24,24,0,0,0,128,152Z"></path></svg>
+                    Esperienza Decennale
+                </div>
+                <div class="trust-item reveal delay-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a48,48,0,1,1-53.82-47.51,8,8,0,0,1,7.64,14.22A32,32,0,1,0,160,128a8,8,0,0,1,16,0Z"></path></svg>
+                    Innovazione Continua
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="chi-siamo">
+            <div class="container">
+                <div class="about-image reveal">
+                    <img src="https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Team di Nuova Edile in riunione">
+                </div>
+                <div class="about-content">
+                    <h2 class="reveal">La nostra storia, la vostra garanzia.</h2>
+                    <p class="reveal delay-1">Fondata su principi di integrità, qualità e dedizione, Nuova Edile s.r.l. è cresciuta fino a diventare un punto di riferimento nel settore delle costruzioni. La nostra forza risiede in un team di professionisti esperti e in un portfolio che testimonia la nostra capacità di trasformare le sfide complesse in successi tangibili.</p>
+                    <p class="reveal delay-2">Siamo più di una semplice impresa di costruzioni; siamo partner dei nostri clienti. Collaboriamo con architetti, ingegneri e committenti per assicurare che ogni dettaglio del progetto rispecchi la visione originale, garantendo al contempo i più alti standard di sicurezza e durabilità.</p>
+                    <a href="#contatti" class="btn btn-primary reveal delay-3">Parla con il nostro team</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servizi">
+            <div class="container">
+                <div class="section-header" style="text-align: center;">
+                    <h2 class="reveal">I Nostri Servizi</h2>
+                    <p class="reveal delay-1" style="margin: 0 auto; margin-top: -20px; margin-bottom: 20px;">Offriamo un servizio completo per coprire ogni esigenza del settore edile, con la massima competenza e professionalità.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M240,216.27V95.73A16,16,0,0,0,229.66,82L136,25.73a8,8,0,0,0-10.32,0L26.34,82A16,16,0,0,0,16,95.73V216.27A16,16,0,0,0,26.34,230l93.64,56.27a8,8,0,0,0,10.32,0L229.66,230A16,16,0,0,0,240,216.27ZM32,99.85l96-57.6,96,57.6V212.15l-96,57.6-96-57.6ZM180,144a8,8,0,0,1-8,8H144v28a8,8,0,0,1-16,0V152H100a8,8,0,0,1,0-16h28V108a8,8,0,0,1,16,0v28h28A8,8,0,0,1,180,144Z"></path></svg>
+                        </div>
+                        <h3>Costruzioni Civili & Residenziali</h3>
+                        <p>Realizzazione di edifici abitativi, ville e complessi residenziali, curando ogni fase dalla progettazione alla consegna chiavi in mano.</p>
+                    </div>
+                    <div class="service-card reveal delay-1">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M240,216H224V88a16,16,0,0,0-16-16H48A16,16,0,0,0,32,88v40H16a8,8,0,0,0,0,16H32v64a8,8,0,0,0,16,0V144H208v72H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,88v40H48V88Z"></path></svg>
+                        </div>
+                        <h3>Costruzioni Industriali</h3>
+                        <p>Costruzione di capannoni, stabilimenti produttivi e strutture logistiche, ottimizzati per l'efficienza e la funzionalità operativa.</p>
+                    </div>
+                    <div class="service-card reveal delay-2">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24a104,104,0,1,0,104,104A104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm57.41-118.59-64,64a8,8,0,0,1-11.32,0l-32-32a8,8,0,0,1,11.32-11.32L120,132.69l58.59-58.6a8,8,0,0,1,11.31,11.32l-2.49,2.49Z"></path></svg>
+                        </div>
+                        <h3>Ristrutturazioni & Restauro</h3>
+                        <p>Recupero e valorizzazione di edifici esistenti, dal risanamento conservativo alla riqualificazione energetica e funzionale.</p>
+                    </div>
+                    <div class="service-card reveal delay-3">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M251.48,153.28l-40-80A8,8,0,0,0,204,64H52a8,8,0,0,0-7.48,9.28l40,80A8,8,0,0,0,92,160h16v40H88a8,8,0,0,0,0,16h80a8,8,0,0,0,0-16h-20V160h16a8,8,0,0,0,7.48-6.72ZM68.17,80H187.83l-32,64H100.17Z"></path></svg>
+                        </div>
+                        <h3>Opere Stradali & Scavi</h3>
+                        <p>Realizzazione di infrastrutture viarie, urbanizzazioni, movimenti terra e scavi per fondazioni, con mezzi e tecniche all'avanguardia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="progetti">
+            <div class="container">
+                <div class="section-header" style="text-align: center;">
+                    <h2 class="reveal">Progetti Realizzati</h2>
+                    <p class="reveal delay-1" style="margin: 0 auto; margin-top: -20px; margin-bottom: 20px;">La qualità del nostro lavoro è la nostra migliore presentazione. Esplora una selezione dei nostri progetti completati.</p>
+                </div>
+                <div class="project-filters reveal delay-2">
+                    <button class="filter-btn active" data-filter="all">Tutti</button>
+                    <button class="filter-btn" data-filter="residenziale">Residenziale</button>
+                    <button class="filter-btn" data-filter="industriale">Industriale</button>
+                    <button class="filter-btn" data-filter="ristrutturazione">Ristrutturazione</button>
+                </div>
+                <div class="project-grid">
+                    <div class="project-item reveal" data-category="residenziale">
+                        <img src="https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Villa moderna">
+                        <div class="project-overlay">
+                            <h3>Villa Privata, Como</h3>
+                            <p>Costruzioni Civili</p>
+                        </div>
+                    </div>
+                    <div class="project-item reveal delay-1" data-category="industriale">
+                        <img src="https://images.pexels.com/photos/845428/pexels-photo-845428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Capannone industriale">
+                        <div class="project-overlay">
+                            <h3>Capannone Logistico, Milano</h3>
+                            <p>Costruzioni Industriali</p>
+                        </div>
+                    </div>
+                    <div class="project-item reveal delay-2" data-category="ristrutturazione">
+                        <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Interni di un appartamento ristrutturato">
+                        <div class="project-overlay">
+                            <h3>Restauro Appartamento, Centro Storico</h3>
+                            <p>Ristrutturazione & Restauro</p>
+                        </div>
+                    </div>
+                     <div class="project-item reveal delay-3" data-category="residenziale">
+                        <img src="https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Casa residenziale">
+                        <div class="project-overlay">
+                            <h3>Complesso Residenziale, Varese</h3>
+                            <p>Costruzioni Civili</p>
+                        </div>
+                    </div>
+                    <div class="project-item reveal" data-category="industriale">
+                        <img src="https://images.pexels.com/photos/256297/pexels-photo-256297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fabbrica">
+                        <div class="project-overlay">
+                            <h3>Ampliamento Fabbrica, Bergamo</h3>
+                            <p>Costruzioni Industriali</p>
+                        </div>
+                    </div>
+                    <div class="project-item reveal delay-1" data-category="ristrutturazione">
+                        <img src="https://images.pexels.com/photos/534151/pexels-photo-534151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Esterno di una casa ristrutturata">
+                        <div class="project-overlay">
+                            <h3>Riqualificazione Energetica, Brescia</h3>
+                            <p>Ristrutturazione</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Process Section -->
+        <section id="processo">
+            <div class="container">
+                <div class="section-header" style="text-align: center;">
+                    <h2 class="reveal">Il Nostro Processo</h2>
+                    <p class="reveal delay-1" style="margin: 0 auto; margin-top: -20px; margin-bottom: 20px;">Un approccio metodico e trasparente per garantire risultati eccellenti, dal primo contatto alla consegna finale.</p>
+                </div>
+                <div class="process-container">
+                    <div class="process-timeline"></div>
+                    <div class="process-step reveal">
+                        <div class="process-number">01</div>
+                        <div class="process-content">
+                            <h3>Consulenza Iniziale</h3>
+                            <p>Ascoltiamo attentamente le vostre esigenze e obiettivi per definire le basi del progetto e proporre le soluzioni più adatte.</p>
+                        </div>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="process-number">02</div>
+                        <div class="process-content">
+                            <h3>Progettazione e Pianificazione</h3>
+                            <p>Sviluppiamo il progetto esecutivo, definiamo il cronoprogramma e gestiamo tutte le pratiche burocratiche necessarie.</p>
+                        </div>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="process-number">03</div>
+                        <div class="process-content">
+                            <h3>Realizzazione</h3>
+                            <p>Eseguiamo i lavori con manodopera specializzata e un costante controllo qualità, garantendo sicurezza e rispetto dei tempi.</p>
+                        </div>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="process-number">04</div>
+                        <div class="process-content">
+                            <h3>Consegna e Assistenza</h3>
+                            <p>Consegniamo l'opera finita a regola d'arte e restiamo a disposizione per ogni esigenza futura, garantendo il vostro investimento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technology Section -->
+        <section id="tecnologia">
+            <div class="container">
+                 <div class="tech-image reveal">
+                    <img src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Ingegnere che lavora su un modello 3D">
+                </div>
+                <div class="tech-content">
+                    <h2 class="reveal">Precisione e Tecnologia</h2>
+                    <p class="reveal delay-1">L'innovazione è nel nostro DNA. Utilizziamo le più moderne tecnologie, dalla modellazione 3D (BIM) alla gestione di progetto digitale, per garantire precisione millimetrica, efficienza operativa e totale trasparenza durante ogni fase del lavoro.</p>
+                    <p class="reveal delay-2">Questo approccio tecnologicamente avanzato ci permette di ottimizzare i tempi, prevenire le criticità e fornire al cliente una visione chiara e dettagliata dell'avanzamento del progetto.</p>
+                    <a href="#contatti" class="btn btn-secondary reveal delay-3">Scopri di più</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contatti">
+            <div class="container">
+                <div class="contact-info">
+                    <h2 class="reveal">Mettiamoci in contatto</h2>
+                    <p class="reveal delay-1">Avete un progetto in mente? Compilate il modulo o utilizzate i nostri contatti diretti. Il nostro team è pronto ad ascoltarvi e a trasformare la vostra visione in realtà.</p>
+                    <ul class="contact-details">
+                        <li class="reveal delay-2">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0,104c-29.3,0-56.35-12.8-76-32.42C38.35,182.8,24,155.35,24,128a103.83,103.83,0,0,1,32.42-76C71.65,34.8,98.7,24,128,24s56.35,10.8,76,28.42C217.65,71.2,232,98.65,232,128s-14.35,56.8-32.42,76C184.35,219.2,157.3,232,128,232Zm0-192c-52.93,0-96,43.07-96,96s43.07,96,96,96,96-43.07,96-96S180.93,40,128,40Z"></path></svg>
+                            <span>Via dell'Edilizia, 123 - 20100 Milano, IT</span>
+                        </li>
+                        <li class="reveal delay-3">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM93.43,128,40,168.21V87.79ZM48,72H208l-80,64-80-64Zm21.84,64,30,24a16,16,0,0,0,18.32,0l30-24L208,184H48Z"></path></svg>
+                            <span>info@nuovaedile.it</span>
+                        </li>
+                        <li class="reveal delay-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256"><path d="M222.39,161.45l-42.17-19.16a16,16,0,0,0-17.3,3.34l-13.48,13.48a8,8,0,0,1-9.84-1.48,93.4,93.4,0,0,1-41.34-41.34,8,8,0,0,1-1.48-9.84l13.48-13.48a16,16,0,0,0,3.34-17.3L94.55,33.61a16,16,0,0,0-15.74-12.78H40.24A16,16,0,0,0,24,37.36a48.14,48.14,0,0,0,4.41,19.29,159,159,0,0,0,155,155,48.14,48.14,0,0,0,19.29,4.41A16,16,0,0,0,219.22,200h-38.57A16,16,0,0,0,222.39,161.45ZM203.1,184H180.24a8,8,0,0,1-8.22-6.56,143.14,143.14,0,0,1-139-139A8,8,0,0,1,39.58,32h22.87a8,8,0,0,1,7.87,6.39L79,77.83a8,8,0,0,1-1.67,8.65L64.8,99a16,16,0,0,0-3,22.42,109.43,109.43,0,0,0,60.1,60.1,16,16,0,0,0,22.42-3l12.51-12.51a8,8,0,0,1,8.65-1.67l39.44,17.92a8,8,0,0,1,6.39,7.87Z"></path></svg>
+                            <span>+39 02 123 4567</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group reveal delay-1">
+                            <input type="text" id="name" name="name" placeholder="Il tuo Nome" required>
+                        </div>
+                        <div class="form-group reveal delay-2">
+                            <input type="email" id="email" name="email" placeholder="La tua Email" required>
+                        </div>
+                        <div class="form-group reveal delay-3">
+                            <input type="text" id="subject" name="subject" placeholder="Oggetto del Messaggio" required>
+                        </div>
+                        <div class="form-group reveal delay-4">
+                            <textarea id="message" name="message" placeholder="Il tuo Messaggio" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary reveal delay-4">Invia Messaggio</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <a href="#home" class="footer-logo reveal">NUOVA EDILE</a>
+            <nav class="footer-nav reveal delay-1">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#chi-siamo">Chi Siamo</a></li>
+                    <li><a href="#servizi">Servizi</a></li>
+                    <li><a href="#progetti">Progetti</a></li>
+                    <li><a href="#contatti">Contatti</a></li>
+                </ul>
+            </nav>
+            <div class="social-links reveal delay-2">
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            </div>
+            <div class="copyright reveal delay-3">
+                &copy; 2023 Nuova Edile s.r.l. - Tutti i diritti riservati. P.IVA 12345678901 | Sito web realizzato da AI
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- CURSOR SCRIPT ---
+            const cursorDot = document.querySelector('.cursor.dot');
+            const cursorCircle = document.querySelector('.cursor.circle');
+            let mouseX = 0, mouseY = 0;
+            let circleX = 0, circleY = 0;
+
+            window.addEventListener('mousemove', e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+                const dx = mouseX - circleX;
+                const dy = mouseY - circleY;
+                circleX += dx * 0.2;
+                circleY += dy * 0.2;
+                cursorCircle.style.transform = `translate(${circleX}px, ${circleY}px)`;
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            const interactiveElements = document.querySelectorAll('a, button, .service-card, .project-item, .filter-btn');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorCircle.style.transform = `translate(${circleX}px, ${circleY}px) scale(1.8)`;
+                    cursorCircle.style.backgroundColor = 'var(--terracotta)';
+                    cursorCircle.style.borderColor = 'transparent';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorCircle.style.transform = `translate(${circleX}px, ${circleY}px) scale(1)`;
+                    cursorCircle.style.backgroundColor = 'transparent';
+                    cursorCircle.style.borderColor = 'var(--terracotta)';
+                });
+            });
+
+            // --- HEADER SCROLL & ACTIVE LINK ---
+            const header = document.querySelector('.main-header');
+            const navLinks = document.querySelectorAll('.main-nav a');
+            const sections = document.querySelectorAll('section');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // --- MOBILE NAVIGATION ---
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            mobileNavToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                mobileNavToggle.classList.toggle('active');
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileNavToggle.classList.remove('active');
+                    }
+                });
+            });
+
+            // --- SCROLL REVEAL ANIMATION ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // --- PROJECT FILTER ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectItems = document.querySelectorAll('.project-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    projectItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
